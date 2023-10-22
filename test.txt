@@ -1,0 +1,12 @@
+VAR x, y, z : LOGICAL;
+BEGIN
+    x = 1;
+    y = 0;
+    z = 0;
+    WRITE(x, y, z);
+    WHILE (.NOT. z) DO
+        z = y .AND. x;
+        WRITE(x, y, z);
+        y = 1;
+    END_WHILE
+END
