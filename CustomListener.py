@@ -15,23 +15,26 @@ class CustomListener(gListener):
                 self.variables[variable] = None
 
     def enterComputationDescription(self, ctx):
+
         self.enterOperatorsList(ctx.operatorsList())
 
     def enterAssignment(self, ctx):
+        # print("enter assignment")
         variable = self.enterIdentifier(ctx.identifier())
         expression = self.enterExpression(ctx.expression())
         self.variables[variable] = expression
+        # print(f"{variable} = {self.variables[variable]}")
 
     def enterLoop(self, ctx):
-        # print("enter loop")
         while self.enterExpression(ctx.expression()):
             self.enterOperatorsList(ctx.operatorsList())
 
     def enterOperatorsList(self, ctx):
+        pass
         for child in ctx.children:
             if isinstance(child, gParser.AssignmentContext):
                 self.enterAssignment(child)
-            elif isinstance(child, gParser.LoopContext):
+            if isinstance(child, gParser.LoopContext):
                 self.enterLoop(child)
             elif isinstance(child, gParser.ReadContext):
                 self.enterRead(child)
@@ -48,7 +51,6 @@ class CustomListener(gListener):
         for identifierContext in ctx.variableList().identifier():
             variable = identifierContext.getText()
             print(f"{identifierContext.getText()} = {self.variables[variable]}")
-    print("\n")
 
     def enterExpression(self, ctx):
         # An expression can be a unary operator followed by a subexpression
@@ -81,6 +83,8 @@ class CustomListener(gListener):
                     value = left or right
                 case ".IMP.":
                     value = not left or right
+                case _:
+                    raise Exception("Unexpected operand!")
         return value
 
     def enterBinaryOperator(self, ctx):

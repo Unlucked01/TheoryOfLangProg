@@ -2,6 +2,7 @@ from antlr4 import *
 from gen.gLexer import gLexer
 from gen.gParser import gParser
 from CustomListener import CustomListener
+from ErrorHandler import ErrorHandler
 
 
 def main():
@@ -9,6 +10,8 @@ def main():
     lexer = gLexer(StdinStream())
     stream = CommonTokenStream(lexer)
     parser = gParser(stream)
+
+    parser.addErrorListener(ErrorHandler())
 
     # Parse the input
     tree = parser.program()
@@ -28,3 +31,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
