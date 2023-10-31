@@ -1,0 +1,9 @@
+VAR x : LOGICAL;
+BEGIN
+    x = 1;
+    WRITE(x);
+    WHILE x DO
+        x = 0;
+        WRITE(x);
+    END_WHILE
+END
