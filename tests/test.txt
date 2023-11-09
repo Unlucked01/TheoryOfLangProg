@@ -1,6 +1,5 @@
 VAR x, y, z : LOGICAL;
 BEGIN
-BEGIN
     x = 1;
     y = 0;
     z = 0;
@@ -11,4 +10,3 @@ BEGIN
         y = 1;
     END_WHILE
 END
-

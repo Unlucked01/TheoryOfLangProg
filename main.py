@@ -1,8 +1,8 @@
 from antlr4 import *
 from gen.gLexer import gLexer
 from gen.gParser import gParser
-from CustomListener import CustomListener
-from ErrorHandler import ErrorHandler
+from custom.CustomListener import CustomListener
+from custom.ErrorHandler import ErrorHandler
 
 
 def main():
